@@ -1,5 +1,8 @@
 todos:
 
+- rework code to Router
+- create Views: Home (2 options - existing user, new user)
+- rework forms / react-hook-form + material-ui
 - sort contacts albhabetically
 - create alphabetical sections for contacts
 - add a page with 1 contact via modal (why for? may contain additional fields?)

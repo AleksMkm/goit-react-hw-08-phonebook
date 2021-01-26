@@ -10,9 +10,15 @@
     margin-right: auto;
   }
 
+  @media screen and (max-width: ($desktop - 1)) {
+    &:not(:last-child) {
+      margin-bottom: 5px;
+    }
+  }
+
   @media screen and (min-width: ($desktop)) {
     width: calc((100% - 80px) / 2);
-    margin: 20px;
+    margin: 10px;
   }
 
   padding: 10px;
@@ -32,12 +38,8 @@
     }
 
     @media screen and (min-width: ($desktop)) {
-      transform: scale(1.15);
+      transform: scale(1.08);
     }
-  }
-
-  &:not(:last-child) {
-    margin-bottom: 5px;
   }
 }
 
