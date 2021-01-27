@@ -11,6 +11,7 @@ function UserMenu() {
 
   const onClick = () => {
     dispatch(authOperations.logoutUser());
+    btn.current.blur();
   };
 
   return (

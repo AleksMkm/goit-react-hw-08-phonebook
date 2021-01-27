@@ -38,16 +38,16 @@ export async function loginUser(email, password) {
 }
 
 export async function logoutUser() {
+  console.log(axios.defaults.headers.common.Authorization);
   const response = await axios.post('/users/logout');
   console.log(response);
-  token.unset(response.data.token);
+  token.unset();
   return response.data;
 }
 
 export async function fetchCurrentUser() {
   const response = await axios.get('/users/current');
   console.log(response);
-  token.unset(response.data.token);
   return response.data;
 }
 
