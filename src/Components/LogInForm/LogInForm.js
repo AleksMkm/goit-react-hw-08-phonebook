@@ -1,31 +1,22 @@
 import React, { useRef } from 'react';
 import { useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
-// import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import styles from './LogInForm.module.scss';
-// import { operations, selectors } from 'redux/contacts';
+import { authOperations } from 'redux/auth';
 
 function LogInForm() {
   const { register, handleSubmit, errors, reset } = useForm();
   const btn = useRef();
-  // const contacts = useSelector(selectors.getContacts);
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
   const onSubmit = data => {
-    // if (
-    //   contacts.find(
-    //     contact => contact.name.toLowerCase() === data.name.toLowerCase(),
-    //   )
-    // ) {
-    //   alert(`${data.name} is already in Phonebook`);
-    //   return;
-    // }
-    // dispatch(
-    //   operations.addContact({
-    //     name: data.name.trim(),
-    //     number: data.number.trim(),
-    //   }),
-    // );
+    dispatch(
+      authOperations.loginUser({
+        email: data.email.trim(),
+        password: data.password.trim(),
+      }),
+    );
     console.log(data);
     btn.current.blur();
     reset({});
@@ -39,32 +30,14 @@ function LogInForm() {
           <input
             ref={register({
               required: true,
-              minLength: 3,
-              maxLength: 8,
-              pattern: /^[A-Za-z]+([ A-Za-z]+)*$/,
             })}
             className={styles.addField}
-            type="text"
-            name="login"
-            placeholder="login"
+            type="email"
+            name="email"
+            placeholder="email"
           />
-          {errors.login && errors.login.type === 'required' && (
+          {errors.email && errors.email.type === 'required' && (
             <p className={styles.error}>Login is required</p>
-          )}
-          {errors.login && errors.login.type === 'minLength' && (
-            <p className={styles.error}>
-              Login is too short. Minimum 3 characters.
-            </p>
-          )}
-          {errors.login && errors.login.type === 'maxLength' && (
-            <p className={styles.error}>
-              Login is too long. Maximum 8 characters.
-            </p>
-          )}
-          {errors.login && errors.login.type === 'pattern' && (
-            <p className={styles.error}>
-              Login can contain only english letters.
-            </p>
           )}
         </label>
         <label className={styles.label}>
