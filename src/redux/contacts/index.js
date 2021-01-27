@@ -1,4 +1,4 @@
-export * as actions from './actions';
-export * as operations from './operations';
-export * as selectors from './selectors';
-export * as reducers from './reducer';
+export * as contactsActions from './contacts-actions';
+export * as contactsOperations from './contacts-operations';
+export * as contactsSelectors from './contacts-selectors';
+export * as contactsReducers from './contacts-reducer';

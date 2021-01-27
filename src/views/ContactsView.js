@@ -4,17 +4,17 @@ import ContactList from 'Components/ContactList';
 import ContactForm from 'Components/ContactForm';
 import Section from 'Components/Section';
 import Filter from 'Components/Filter';
-import { operations, selectors } from 'redux/contacts';
+import { contactsOperations, contactsSelectors } from 'redux/contacts';
 import Loader from 'Components/Loader';
 
 function ContactsView() {
-  const contacts = useSelector(selectors.getContacts);
-  const error = useSelector(selectors.getErrorData);
-  const isLoading = useSelector(selectors.getLoadingData);
+  const contacts = useSelector(contactsSelectors.getContacts);
+  const error = useSelector(contactsSelectors.getErrorData);
+  const isLoading = useSelector(contactsSelectors.getLoadingData);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(operations.fetchContacts());
+    dispatch(contactsOperations.fetchContacts());
     //eslint-disable-next-line
   }, []);
 

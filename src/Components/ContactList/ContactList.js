@@ -2,9 +2,9 @@ import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import Contact from './Contact';
 import styles from './ContactList.module.scss';
-import { operations, selectors } from 'redux/contacts';
+import { contactsOperations, contactsSelectors } from 'redux/contacts';
 
-const { getContacts, getFilter, getFilteredContacts } = selectors;
+const { getContacts, getFilter, getFilteredContacts } = contactsSelectors;
 
 function ContactList() {
   const contacts = useSelector(getContacts);
@@ -22,7 +22,8 @@ function ContactList() {
           id: contact.id,
           name: contact.name,
           phone: contact.number,
-          deleteHandler: () => dispatch(operations.deleteContact(contact.id)),
+          deleteHandler: () =>
+            dispatch(contactsOperations.deleteContact(contact.id)),
         }),
       )}
     </ul>
