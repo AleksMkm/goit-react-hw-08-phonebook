@@ -1,4 +1,5 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
+import axios from 'axios';
 import * as API from 'services/phonebook-api';
 
 export const createUser = createAsyncThunk(
@@ -32,6 +33,27 @@ export const logoutUser = createAsyncThunk(
       await API.logoutUser();
     } catch (error) {
       return rejectWithValue(error.message);
+    }
+  },
+);
+
+export const fetchCurrentUser = createAsyncThunk(
+  'auth/fetchCurrentUser',
+  async (_, thunkAPI) => {
+    const state = thunkAPI.getState();
+    const persistedToken = state.auth.token;
+
+    if (persistedToken === null) {
+      return thunkAPI.rejectWithValue('you have to log in');
+    }
+
+    axios.defaults.headers.common.Authorization = `Bearer ${persistedToken}`;
+    try {
+      const response = await API.fetchCurrentUser();
+      console.log(response);
+      return response;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
     }
   },
 );

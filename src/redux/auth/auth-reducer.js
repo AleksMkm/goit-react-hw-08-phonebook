@@ -1,7 +1,7 @@
 import { combineReducers, createReducer } from '@reduxjs/toolkit';
 import { authOperations } from 'redux/auth';
 
-const { createUser, loginUser, logoutUser } = authOperations;
+const { createUser, loginUser, logoutUser, fetchCurrentUser } = authOperations;
 
 const user = createReducer(
   { name: null, email: null },
@@ -9,6 +9,7 @@ const user = createReducer(
     [createUser.fulfilled]: (_, { payload }) => payload.user,
     [loginUser.fulfilled]: (_, { payload }) => payload.user,
     [logoutUser.fulfilled]: () => ({ name: null, email: null }),
+    [fetchCurrentUser.fulfilled]: (_, { payload }) => payload,
   },
 );
 
@@ -22,6 +23,7 @@ const isLoggedIn = createReducer(false, {
   [createUser.fulfilled]: () => true,
   [loginUser.fulfilled]: () => true,
   [logoutUser.fulfilled]: () => false,
+  [fetchCurrentUser.fulfilled]: () => true,
 });
 
 const error = createReducer(null, {
@@ -31,6 +33,8 @@ const error = createReducer(null, {
   [loginUser.pending]: () => null,
   [logoutUser.rejected]: (_, action) => action.payload,
   [logoutUser.pending]: () => null,
+  [fetchCurrentUser.rejected]: (_, action) => action.payload,
+  [fetchCurrentUser.pending]: () => null,
 });
 
 export const auth = combineReducers({ user, token, isLoggedIn, error });
