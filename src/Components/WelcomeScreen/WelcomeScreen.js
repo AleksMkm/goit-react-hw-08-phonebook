@@ -12,7 +12,7 @@ function WelcomeScreen() {
         <p className={s.text}>
           Welcome to our service! Please Log In or Sign Up to continue.
         </p>
-        <Link to="/register" className={s.link}>
+        <Link to="/signup" className={s.link}>
           Sign Up
         </Link>
         <Link to="/login" className={s.link}>

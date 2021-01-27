@@ -67,7 +67,7 @@ function ContactForm() {
           className={styles.addField}
           type="text"
           name="number"
-          placeholder="xxxx-xx-xx"
+          placeholder="phone number"
         />
         {errors.number && errors.number.type === 'required' && (
           <p className={styles.error}>Number is required</p>
