@@ -1,40 +1,67 @@
-import { combineReducers, createReducer } from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit';
 import { authOperations } from 'redux/auth';
 
 const { createUser, loginUser, logoutUser, fetchCurrentUser } = authOperations;
 
-const user = createReducer(
-  { name: null, email: null },
-  {
-    [createUser.fulfilled]: (_, { payload }) => payload.user,
-    [loginUser.fulfilled]: (_, { payload }) => payload.user,
-    [logoutUser.fulfilled]: () => ({ name: null, email: null }),
-    [fetchCurrentUser.fulfilled]: (_, { payload }) => payload,
+const initialState = {
+  user: { name: null, email: null },
+  token: null,
+  isLoggedIn: false,
+  error: null,
+  isFetchingCurrentUser: false,
+};
+
+const authSlice = createSlice({
+  name: 'auth',
+  initialState,
+  extraReducers: {
+    [createUser.fulfilled](state, { payload }) {
+      state.user = payload.user;
+      state.token = payload.token;
+      state.isLoggedIn = true;
+    },
+    [createUser.pending](state) {
+      state.error = null;
+    },
+    [createUser.rejected](state, { payload }) {
+      state.error = payload;
+    },
+    [loginUser.fulfilled](state, { payload }) {
+      state.user = payload.user;
+      state.token = payload.token;
+      state.isLoggedIn = true;
+    },
+    [loginUser.pending](state) {
+      state.error = null;
+    },
+    [loginUser.rejected](state, { payload }) {
+      state.error = payload;
+    },
+    [logoutUser.fulfilled](state) {
+      state.user = initialState.user;
+      state.token = null;
+      state.isLoggedIn = false;
+    },
+    [logoutUser.pending](state) {
+      state.error = null;
+    },
+    [logoutUser.rejected](state, { payload }) {
+      state.error = payload;
+    },
+    [fetchCurrentUser.fulfilled](state, { payload }) {
+      state.user = payload;
+      state.isLoggedIn = true;
+      state.isFetchingCurrentUser = false;
+    },
+    [fetchCurrentUser.pending](state) {
+      state.error = null;
+      state.isFetchingCurrentUser = true;
+    },
+    [fetchCurrentUser.rejected](state, { payload }) {
+      state.error = payload;
+      state.isFetchingCurrentUser = false;
+    },
   },
-);
-
-const token = createReducer(null, {
-  [createUser.fulfilled]: (_, { payload }) => payload.token,
-  [loginUser.fulfilled]: (_, { payload }) => payload.token,
-  [logoutUser.fulfilled]: () => null,
 });
 
-const isLoggedIn = createReducer(false, {
-  [createUser.fulfilled]: () => true,
-  [loginUser.fulfilled]: () => true,
-  [logoutUser.fulfilled]: () => false,
-  [fetchCurrentUser.fulfilled]: () => true,
-});
-
-const error = createReducer(null, {
-  [createUser.rejected]: (_, action) => action.payload,
-  [createUser.pending]: () => null,
-  [loginUser.rejected]: (_, action) => action.payload,
-  [loginUser.pending]: () => null,
-  [logoutUser.rejected]: (_, action) => action.payload,
-  [logoutUser.pending]: () => null,
-  [fetchCurrentUser.rejected]: (_, action) => action.payload,
-  [fetchCurrentUser.pending]: () => null,
-});
-
-export const auth = combineReducers({ user, token, isLoggedIn, error });
+export default authSlice.reducer;

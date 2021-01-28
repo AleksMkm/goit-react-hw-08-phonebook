@@ -18,9 +18,6 @@ function WelcomeScreen() {
         <Link to="/login" className={s.link}>
           Log In
         </Link>
-        <Link to="/contacts" className={s.link}>
-          Contacts
-        </Link>
       </div>
     </>
   );

@@ -38,7 +38,6 @@ export async function loginUser(email, password) {
 }
 
 export async function logoutUser() {
-  console.log(axios.defaults.headers.common.Authorization);
   const response = await axios.post('/users/logout');
   // console.log(response);
   token.unset();
@@ -53,8 +52,7 @@ export async function fetchCurrentUser() {
 
 export async function fetchContacts() {
   const response = await axios.get('/contacts');
-  console.log(axios.defaults.headers.common.Authorization);
-  console.log(response);
+  // console.log(response);
   return response.data;
 }
 

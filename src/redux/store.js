@@ -27,14 +27,11 @@ const middleware = [
   }),
 ];
 
-const authPersistedReducer = persistReducer(
-  authPersistConfig,
-  authReducer.auth,
-);
+const authPersistedReducer = persistReducer(authPersistConfig, authReducer);
 
 export const store = configureStore({
   reducer: {
-    contacts: contactsReducer.contacts,
+    contacts: contactsReducer,
     auth: authPersistedReducer,
   },
   middleware,
