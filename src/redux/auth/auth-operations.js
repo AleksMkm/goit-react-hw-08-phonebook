@@ -50,7 +50,6 @@ export const fetchCurrentUser = createAsyncThunk(
     axios.defaults.headers.common.Authorization = `Bearer ${persistedToken}`;
     try {
       const response = await API.fetchCurrentUser();
-      console.log(response);
       return response;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);

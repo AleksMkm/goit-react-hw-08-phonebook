@@ -20,7 +20,7 @@ export async function createUser(name, email, password) {
   };
   console.log(user);
   const response = await axios.post('/users/signup', user);
-  console.log(response);
+  // console.log(response);
   token.set(response.data.token);
   return response.data;
 }
@@ -32,7 +32,7 @@ export async function loginUser(email, password) {
   };
   console.log(user);
   const response = await axios.post('/users/login', user);
-  console.log(response);
+  // console.log(response);
   token.set(response.data.token);
   return response.data;
 }
@@ -40,19 +40,21 @@ export async function loginUser(email, password) {
 export async function logoutUser() {
   console.log(axios.defaults.headers.common.Authorization);
   const response = await axios.post('/users/logout');
-  console.log(response);
+  // console.log(response);
   token.unset();
   return response.data;
 }
 
 export async function fetchCurrentUser() {
   const response = await axios.get('/users/current');
-  console.log(response);
+  // console.log(response);
   return response.data;
 }
 
 export async function fetchContacts() {
   const response = await axios.get('/contacts');
+  console.log(axios.defaults.headers.common.Authorization);
+  console.log(response);
   return response.data;
 }
 

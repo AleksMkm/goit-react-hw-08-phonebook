@@ -9,6 +9,7 @@ import Container from 'Components/Container';
 import AppBar from 'Components/AppBar';
 import Footer from 'Components/Footer';
 import { authOperations } from 'redux/auth';
+import { PrivateRoute, PublicRoute } from 'services/routes';
 
 function App() {
   const dispatch = useDispatch();
@@ -22,10 +23,18 @@ function App() {
       <AppBar />
 
       <Switch>
-        <Route exact path="/" component={HomeView} />
-        <Route path="/signup" component={SignUpView} />
-        <Route path="/login" component={LogInView} />
-        <Route path="/contacts" component={ContactsView} />
+        <PublicRoute exact path="/" restricted redirectTo={'/contacts'}>
+          <HomeView />
+        </PublicRoute>
+        <PublicRoute path="/signup" restricted redirectTo={'/contacts'}>
+          <SignUpView />
+        </PublicRoute>
+        <PublicRoute path="/login" restricted redirectTo={'/contacts'}>
+          <LogInView />
+        </PublicRoute>
+        <PrivateRoute path="/contacts" redirectTo={'/login'}>
+          <ContactsView />
+        </PrivateRoute>
       </Switch>
 
       <Footer />
