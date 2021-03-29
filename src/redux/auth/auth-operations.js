@@ -9,7 +9,7 @@ export const createUser = createAsyncThunk(
       const user = await API.createUser(name, email, password);
       return user;
     } catch (error) {
-      return rejectWithValue(error.message);
+      return rejectWithValue(error.response.data);
     }
   },
 );

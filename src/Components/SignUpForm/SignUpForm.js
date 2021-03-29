@@ -11,7 +11,7 @@ function SignUpForm() {
   const dispatch = useDispatch();
 
   const onSubmit = data => {
-    console.log(data);
+    // console.log(data);
     dispatch(
       authOperations.createUser({
         name: data.login.trim(),

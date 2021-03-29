@@ -1,7 +1,7 @@
 import axios from 'axios';
 
-// axios.defaults.baseURL = 'http://localhost:4040';
-axios.defaults.baseURL = 'https://goit-phonebook-api.herokuapp.com/';
+axios.defaults.baseURL = 'http://localhost:3030/api';
+// axios.defaults.baseURL = 'https://phonebook-restapi.herokuapp.com/api';
 
 const token = {
   set(token) {
@@ -18,11 +18,11 @@ export async function createUser(name, email, password) {
     email,
     password,
   };
-  console.log(user);
-  const response = await axios.post('/users/signup', user);
-  // console.log(response);
-  token.set(response.data.token);
-  return response.data;
+  // console.log(user);
+  const response = await axios.post('/auth/signup', user);
+  console.log(response);
+  // token.set(response.data.token);
+  return response.data.data;
 }
 
 export async function loginUser(email, password) {
@@ -38,7 +38,7 @@ export async function loginUser(email, password) {
 }
 
 export async function logoutUser() {
-  const response = await axios.post('/users/logout');
+  const response = await axios.post('/auth/logout');
   // console.log(response);
   token.unset();
   return response.data;
