@@ -1,9 +1,11 @@
 import React, { useEffect } from 'react';
 import { Switch } from 'react-router-dom';
+
 import { useDispatch, useSelector } from 'react-redux';
 import HomeView from 'views/HomeView';
 import ContactsView from 'views/ContactsView';
 import SignUpView from 'views/SignUpView';
+import VerificationView from 'views/VerificationView';
 import LogInView from 'views/LogInView';
 import Container from 'Components/Container';
 import AppBar from 'Components/AppBar';
@@ -19,11 +21,20 @@ function App() {
 
   useEffect(() => {
     dispatch(authOperations.fetchCurrentUser());
-  }, [dispatch]);
+    //eslint-disable-next-line
+  }, []);
 
   return (
     <Container>
       <AppBar />
+
+      <PublicRoute
+        path="/verify/:verificationToken"
+        restricted
+        redirectTo={'/contacts'}
+      >
+        <VerificationView />
+      </PublicRoute>
 
       {!isFetchingCurrentUser && (
         <>
@@ -34,6 +45,7 @@ function App() {
             <PublicRoute path="/signup" restricted redirectTo={'/contacts'}>
               <SignUpView />
             </PublicRoute>
+
             <PublicRoute path="/login" restricted redirectTo={'/contacts'}>
               <LogInView />
             </PublicRoute>

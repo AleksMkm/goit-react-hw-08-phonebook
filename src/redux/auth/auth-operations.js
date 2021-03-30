@@ -14,6 +14,18 @@ export const createUser = createAsyncThunk(
   },
 );
 
+export const verifyUser = createAsyncThunk(
+  'auth/verifyUser',
+  async (verificationToken, { rejectWithValue }) => {
+    try {
+      const user = await API.verifyUser(verificationToken);
+      return user;
+    } catch (error) {
+      return rejectWithValue(error.response.data);
+    }
+  },
+);
+
 export const loginUser = createAsyncThunk(
   'auth/loginUser',
   async ({ email, password }, { rejectWithValue }) => {

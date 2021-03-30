@@ -1,7 +1,13 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { authOperations, authActions } from 'redux/auth';
 
-const { createUser, loginUser, logoutUser, fetchCurrentUser } = authOperations;
+const {
+  createUser,
+  loginUser,
+  logoutUser,
+  fetchCurrentUser,
+  verifyUser,
+} = authOperations;
 const {
   toggleModal,
   nullifyError,
@@ -17,7 +23,6 @@ const initialState = {
   isFetchingCurrentUser: false,
   isModalOpened: false,
   modalType: null,
-  isVerified: false,
   isUserCreated: null,
 };
 
@@ -40,13 +45,20 @@ const authSlice = createSlice({
     [createUser.fulfilled](state, { payload }) {
       state.user = payload.data.user;
       state.isUserCreated = payload.code;
-      // state.token = payload.token;
-      // state.isLoggedIn = true;
     },
     [createUser.pending](state) {
       state.error = null;
     },
     [createUser.rejected](state, { payload }) {
+      state.error = payload;
+    },
+    [verifyUser.fulfilled](state, { payload }) {
+      state.user = payload.data.user;
+    },
+    [verifyUser.pending](state) {
+      state.error = null;
+    },
+    [verifyUser.rejected](state, { payload }) {
       state.error = payload;
     },
     [loginUser.fulfilled](state, { payload }) {

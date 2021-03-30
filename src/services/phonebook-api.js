@@ -25,6 +25,13 @@ export async function createUser(name, email, password) {
   return response.data;
 }
 
+export async function verifyUser(verificationToken) {
+  const response = await axios.get(`/auth/verify/${verificationToken}`);
+  console.log(response);
+  // token.set(response.data.token);
+  return response.data;
+}
+
 export async function loginUser(email, password) {
   const user = {
     email,
