@@ -2,7 +2,12 @@ import { createSlice } from '@reduxjs/toolkit';
 import { authOperations, authActions } from 'redux/auth';
 
 const { createUser, loginUser, logoutUser, fetchCurrentUser } = authOperations;
-const { toggleModal, nullifyError } = authActions;
+const {
+  toggleModal,
+  nullifyError,
+  setModalType,
+  nullifyCreationCode,
+} = authActions;
 
 const initialState = {
   user: { name: null, email: null },
@@ -11,6 +16,9 @@ const initialState = {
   error: null,
   isFetchingCurrentUser: false,
   isModalOpened: false,
+  modalType: null,
+  isVerified: false,
+  isUserCreated: null,
 };
 
 const authSlice = createSlice({
@@ -20,11 +28,18 @@ const authSlice = createSlice({
     [nullifyError](state) {
       state.error = null;
     },
+    [nullifyCreationCode](state) {
+      state.isUserCreated = null;
+    },
     [toggleModal](state, { payload }) {
       state.isModalOpened = payload;
     },
+    [setModalType](state, { payload }) {
+      state.modalType = payload;
+    },
     [createUser.fulfilled](state, { payload }) {
-      state.user = payload.user;
+      state.user = payload.data.user;
+      state.isUserCreated = payload.code;
       // state.token = payload.token;
       // state.isLoggedIn = true;
     },

@@ -22,7 +22,7 @@ export async function createUser(name, email, password) {
   const response = await axios.post('/auth/signup', user);
   console.log(response);
   // token.set(response.data.token);
-  return response.data.data;
+  return response.data;
 }
 
 export async function loginUser(email, password) {

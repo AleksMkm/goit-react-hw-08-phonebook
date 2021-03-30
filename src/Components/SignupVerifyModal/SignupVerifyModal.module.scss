@@ -1,0 +1,62 @@
+@import '../../styles/variables.scss';
+
+.title {
+  margin: 0 0 10px;
+  font-size: 32px;
+}
+
+.upperText {
+  margin: 0;
+  margin-bottom: 10px;
+
+  font-size: 16px;
+}
+
+.text {
+  margin: 0;
+
+  font-size: 16px;
+}
+
+.link {
+  text-decoration: none;
+  font-weight: 700;
+  color: $textColor;
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.content {
+  position: absolute;
+  top: 30%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  width: 300px;
+
+  @media screen and (min-width: ($tablet )) {
+    width: 600px;
+  }
+
+  padding: 20px;
+
+  text-align: center;
+
+  border: 1px solid #ccc;
+  background: #fff;
+  overflow: auto;
+  border-radius: 4px;
+  outline: none;
+}
