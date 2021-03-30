@@ -8,11 +8,11 @@ import { toggleModal } from 'redux/auth/auth-actions';
 
 function SignUpView() {
   const error = useSelector(authSelectors.getUserError);
-  console.log(error?.code);
+  // console.log(error?.code);
   const dispatch = useDispatch();
 
   const isModalOpen = useSelector(authSelectors.getUserModal);
-  console.log(isModalOpen);
+  // console.log(isModalOpen);
 
   if (error?.code === 409) {
     dispatch(toggleModal(true));

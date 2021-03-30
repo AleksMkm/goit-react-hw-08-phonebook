@@ -35,22 +35,30 @@
 
 .content {
   position: absolute;
+  top: 30%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 600px;
 
-  right: 0px;
-  bottom: 0px;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  width: 300px;
+
+  @media screen and (min-width: ($tablet )) {
+    width: 600px;
+  }
+
+  padding: 20px;
+
+  @media screen and (max-width: ($tablet - 1)) {
+    text-align: center;
+  }
+
   border: 1px solid #ccc;
   background: #fff;
   overflow: auto;
   border-radius: 4px;
   outline: none;
-  padding: 20px;
 }
