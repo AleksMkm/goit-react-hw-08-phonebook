@@ -38,8 +38,8 @@ export async function loginUser(email, password) {
     password,
   };
   console.log(user);
-  const response = await axios.post('/users/login', user);
-  // console.log(response);
+  const response = await axios.post('/auth/login', user);
+  console.log(response);
   token.set(response.data.token);
   return response.data;
 }

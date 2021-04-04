@@ -17,7 +17,7 @@ function LogInForm() {
         password: data.password.trim(),
       }),
     );
-    console.log(data);
+    // console.log(data);
     btn.current.blur();
     reset({});
   };
