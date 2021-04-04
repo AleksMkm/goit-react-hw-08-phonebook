@@ -40,7 +40,7 @@ export async function loginUser(email, password) {
   console.log(user);
   const response = await axios.post('/auth/login', user);
   console.log(response);
-  token.set(response.data.token);
+  token.set(response.data.data.token);
   return response.data;
 }
 
@@ -52,7 +52,7 @@ export async function logoutUser() {
 }
 
 export async function fetchCurrentUser() {
-  const response = await axios.get('/users/current');
+  const response = await axios.get('/auth/current');
   // console.log(response);
   return response.data;
 }
