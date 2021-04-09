@@ -1,7 +1,7 @@
 import axios from 'axios';
 
-axios.defaults.baseURL = 'http://localhost:3030/api';
-// axios.defaults.baseURL = 'https://phonebook-restapi.herokuapp.com/api';
+// axios.defaults.baseURL = 'http://localhost:3030/api';
+axios.defaults.baseURL = 'https://phonebook-restapi.herokuapp.com/api';
 
 const token = {
   set(token) {
