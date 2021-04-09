@@ -15,15 +15,17 @@ function ContactList() {
 
   const displayedContacts = filter.trim() ? filteredContacts : contacts;
 
+  // console.log(contacts);
+
   return (
     <ul className={styles.contactList}>
       {displayedContacts.map(contact =>
         Contact({
-          id: contact.id,
+          id: contact._id,
           name: contact.name,
           phone: contact.number,
           deleteHandler: () =>
-            dispatch(contactsOperations.deleteContact(contact.id)),
+            dispatch(contactsOperations.deleteContact(contact._id)),
         }),
       )}
     </ul>

@@ -19,7 +19,7 @@ const contactsSlice = createSlice({
       state.filter = payload;
     },
     [fetchContacts.fulfilled](state, { payload }) {
-      state.entries = payload;
+      state.entries = payload.data.contacts;
       state.isLoading = false;
     },
     [fetchContacts.pending](state) {
@@ -31,7 +31,7 @@ const contactsSlice = createSlice({
       state.error = payload;
     },
     [addContact.fulfilled](state, { payload }) {
-      state.entries = [...state.entries, payload];
+      state.entries = [...state.entries, payload.data.contact];
       state.isLoading = false;
     },
     [addContact.pending](state) {

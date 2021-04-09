@@ -8,6 +8,7 @@ function ContactForm() {
   const { register, handleSubmit, errors, reset } = useForm();
   const btn = useRef();
   const contacts = useSelector(contactsSelectors.getContacts);
+  // console.log(contacts);
   const dispatch = useDispatch();
 
   const onSubmit = data => {
